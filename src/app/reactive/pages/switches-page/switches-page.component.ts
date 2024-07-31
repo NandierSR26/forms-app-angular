@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ValidatorsService } from 'src/app/shared/service/validators.service';
 
 @Component({
   templateUrl: './switches-page.component.html',
@@ -21,6 +22,7 @@ export class SwitchesPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private validatosService: ValidatorsService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class SwitchesPageComponent implements OnInit {
   }
 
   isValidField(field: string): boolean | null {
-    return this.myForm.controls[field].errors && this.myForm.controls[field].touched
+    return this.validatosService.isValidField(this.myForm, field)
   }
 
   onSave(): void {
